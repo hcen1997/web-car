@@ -6,7 +6,7 @@
  * 版权所有，侵权必究！
  */
 
-package cc.hcen;
+package cc.hcen.model;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -18,6 +18,14 @@ import java.util.Map;
  */
 public class R extends HashMap<String, Object> {
 	private static final long serialVersionUID = 1L;
+
+	public static void sleep(){
+		try {
+			Thread.sleep(10);
+		} catch (InterruptedException e) {
+			System.out.println("sleep error");;
+		}
+	}
 
 	public R() {
 		put("code", 0);

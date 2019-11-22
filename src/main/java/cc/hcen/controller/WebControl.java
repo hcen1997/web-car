@@ -1,5 +1,8 @@
-package cc.hcen;
+package cc.hcen.controller;
 
+import cc.hcen.Main;
+import cc.hcen.model.Car;
+import cc.hcen.model.R;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -8,8 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/car")
 public class WebControl {
-    @Autowired
-    Car car;
+
+    private static Car car = Main.car;
 
     @RequestMapping("/go")
     public R go() {

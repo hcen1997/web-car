@@ -14,8 +14,8 @@
     <properties>
         <!--wagon plugin 配置-->
         <service-path>/home/pi/webCar</service-path>
-        <pack-name>${project.artifactId}-jar-with-dependencies.jar</pack-name>
-        <remote-addr>192.168.0.106:22</remote-addr>
+        <pack-name>${project.artifactId}.jar</pack-name>
+        <remote-addr>192.168.0.110:22</remote-addr>
         <remote-username>pi</remote-username>
         <remote-passwd>raspberry</remote-passwd>
     </properties>
@@ -23,7 +23,7 @@
         <dependency>
             <groupId>com.pi4j</groupId>
             <artifactId>pi4j-core</artifactId>
-            <version>1.1</version>
+            <version>1.2</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
