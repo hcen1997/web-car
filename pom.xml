@@ -40,6 +40,11 @@
             <artifactId>lombok</artifactId>
             <version>1.18.4</version>
         </dependency>
+        <dependency>
+            <groupId>org.bytedeco</groupId>
+            <artifactId>javacv-platform</artifactId>
+            <version>1.5.2</version>
+        </dependency>
     </dependencies>
     <build>
         <finalName>${project.artifactId}</finalName>
@@ -68,30 +73,30 @@
                     <encoding>utf-8</encoding>
                 </configuration>
             </plugin>
-<!--            <plugin>-->
-<!--                <groupId>org.apache.maven.plugins</groupId>-->
-<!--                <artifactId>maven-assembly-plugin</artifactId>-->
-<!--                <version>2.5.5</version>-->
-<!--                <configuration>-->
-<!--                    <archive>-->
-<!--                        <manifest>-->
-<!--                            <mainClass>cc.hcen.Main</mainClass>-->
-<!--                        </manifest>-->
-<!--                    </archive>-->
-<!--                    <descriptorRefs>-->
-<!--                        <descriptorRef>jar-with-dependencies</descriptorRef>-->
-<!--                    </descriptorRefs>-->
-<!--                </configuration>-->
-<!--                <executions>-->
-<!--                    <execution>-->
-<!--                        <id>make-assembly</id>-->
-<!--                        <phase>package</phase>-->
-<!--                        <goals>-->
-<!--                            <goal>single</goal>-->
-<!--                        </goals>-->
-<!--                    </execution>-->
-<!--                </executions>-->
-<!--            </plugin>-->
+            <!--            <plugin>-->
+            <!--                <groupId>org.apache.maven.plugins</groupId>-->
+            <!--                <artifactId>maven-assembly-plugin</artifactId>-->
+            <!--                <version>2.5.5</version>-->
+            <!--                <configuration>-->
+            <!--                    <archive>-->
+            <!--                        <manifest>-->
+            <!--                            <mainClass>cc.hcen.Main</mainClass>-->
+            <!--                        </manifest>-->
+            <!--                    </archive>-->
+            <!--                    <descriptorRefs>-->
+            <!--                        <descriptorRef>jar-with-dependencies</descriptorRef>-->
+            <!--                    </descriptorRefs>-->
+            <!--                </configuration>-->
+            <!--                <executions>-->
+            <!--                    <execution>-->
+            <!--                        <id>make-assembly</id>-->
+            <!--                        <phase>package</phase>-->
+            <!--                        <goals>-->
+            <!--                            <goal>single</goal>-->
+            <!--                        </goals>-->
+            <!--                    </execution>-->
+            <!--                </executions>-->
+            <!--            </plugin>-->
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>wagon-maven-plugin</artifactId>
@@ -101,17 +106,17 @@
                     <url><![CDATA[scp://${remote-username}:${remote-passwd}@${remote-addr}${service-path}]]></url>
                     <commands>
                         <!-- Kill Old Process -->
-<!--                        <command>kill -9 `ps -ef |grep ${project.artifactId}-jar-with-dependencies.jar|grep -v "grep" |awk '{print $2}'`-->
-<!--                        </command>-->
+                        <!--                        <command>kill -9 `ps -ef |grep ${project.artifactId}-jar-with-dependencies.jar|grep -v "grep" |awk '{print $2}'`-->
+                        <!--                        </command>-->
                         <!-- Restart jar package，write result into renren.log -->
                         <command>
                             <![CDATA[nohup java -jar ${service-path}/${project.artifactId}-jar-with-dependencies.jar  > ${service-path}/webCar.log 2>&1 & ]]></command>
-<!--                        <command><![CDATA[netstat -nptl]]></command>-->
-<!--                        <command><![CDATA[ps -ef | grep java | grep -v grep]]></command>-->
-<!--                        <command>echo 1</command>-->
+                        <!--                        <command><![CDATA[netstat -nptl]]></command>-->
+                        <!--                        <command><![CDATA[ps -ef | grep java | grep -v grep]]></command>-->
+                        <!--                        <command>echo 1</command>-->
                     </commands>
                     <!-- 运行命令 mvn clean package wagon:upload-single wagon:sshexec-->
-<!--                    <displayCommandOutputs>true</displayCommandOutputs>-->
+                    <!--                    <displayCommandOutputs>true</displayCommandOutputs>-->
                 </configuration>
             </plugin>
         </plugins>

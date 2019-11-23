@@ -14,7 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class Main {
 
-    public static Car car = new Car();
+    public  static Car car = new Car();
+    public final static String imgDir = "/home/pi/img";
 
     @Bean
     public WebServerFactoryCustomizer<ConfigurableWebServerFactory> webServerFactoryCustomizer() {
