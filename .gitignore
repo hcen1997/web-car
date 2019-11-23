@@ -29,6 +29,7 @@ hs_err_pid*
 
 .history
 webcar.iml
+*.iml
 
 test is github hotkey push work
 .project

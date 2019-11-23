@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/car")
-public class WebControl {
+public class CarController {
 
     private static Car car = Main.car;
 
@@ -31,4 +31,16 @@ public class WebControl {
         car.back();
         return R.ok();
     }
+    @RequestMapping("/left")
+    public R left() {
+        car.turnLeft();
+        return R.ok();
+    }
+    @RequestMapping("/right")
+    public R right() {
+        car.turnRight();
+        return R.ok();
+    }
+
+
 }

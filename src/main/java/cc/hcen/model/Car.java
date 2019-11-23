@@ -82,17 +82,41 @@ public class Car {
 
     }
     public  void turnLeft(){
-        try {
-            throw new Exception("stub!");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        // 右侧轮正转
+        LFFPin.low();
+        R.sleep();
+        LFBPin.low();
+        R.sleep();
+        RFFPin.high();
+        R.sleep();
+        RFBPin.low();
+        R.sleep();
+        LBFPin.low();
+        R.sleep();
+        LBBPin.low();
+        R.sleep();
+        RBFPin.high();
+        R.sleep();
+        RBBPin.low();
+        R.sleep();
     }
     public  void turnRight(){
-        try {
-            throw new Exception("stub!");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        LFFPin.high();
+        R.sleep();
+        LFBPin.low();
+        R.sleep();
+        RFFPin.low();
+        R.sleep();
+        RFBPin.low();
+        R.sleep();
+        LBFPin.high();
+        R.sleep();
+        LBBPin.low();
+        R.sleep();
+        RBFPin.low();
+        R.sleep();
+        RBBPin.low();
+        R.sleep();
     }
+
 }

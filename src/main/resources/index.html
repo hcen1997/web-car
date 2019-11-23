@@ -1,0 +1,27 @@
+<button onclick="fetch('/car/left')">left</button>
+<button onclick="fetch('/car/right')">right</button>
+<br>
+<button onclick="fetch('/car/go')">go</button>
+<button onclick="fetch('/car/stop')">stop</button>
+<button onclick="fetch('/car/back')">back</button>
+<br>
+<img id="last" src="http://192.168.0.110:8091/jpg/1574085661.jpg" />
+<script>
+    function run() {
+        let u = 'http://'+ window.location.hostname + ':8091/jpg'
+        fetch(u)
+            .then(function(response) {
+                return response.text();
+            }).then(function(data) {
+            let div = document.createElement('div')
+            div.innerHTML = data
+            let list = div.getElementsByTagName('li')
+            let last = list.item(list.length-1)
+            let lastName = last.textContent
+            let img = document.getElementById('last')
+            img.src = u + '/'+ lastName
+        });
+
+    }
+    setInterval(run,1000)
+</script>

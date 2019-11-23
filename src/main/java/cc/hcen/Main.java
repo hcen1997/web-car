@@ -10,11 +10,19 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.stream.Stream;
+
 @SpringBootApplication
 @RestController
 public class Main {
 
-    public  static Car car = new Car();
+    public static Car car = new Car();
     public final static String imgDir = "/home/pi/img";
 
     @Bean
@@ -23,39 +31,22 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        SpringApplication.run(Main.class,args);
+        SpringApplication.run(Main.class, args);
     }
 
     @RequestMapping("")
-    public String index(){
+    public String index() {
         return "/car/go;/car/stop;/car/back;\n/gui";
     }
+
     @RequestMapping("/gui")
-    public String gui(){
-        //language=HTML
-        String html = "<button onclick=\"fetch('/car/go')\">go</button>\n" +
-                "<button onclick=\"fetch('/car/stop')\">stop</button>\n" +
-                "<button onclick=\"fetch('/car/back')\">back</button>\n" +
-                "<img id=\"last\" src=\"http://192.168.0.110:8091/jpg/1574085661.jpg\" />\n" +
-                "<script>\n" +
-                "    function run() {\n" +
-                "        let u = 'http://'+ window.location.hostname + ':8091/jpg'\n" +
-                "        fetch(u)\n" +
-                "            .then(function(response) {\n" +
-                "                return response.text();\n" +
-                "            }).then(function(data) {\n" +
-                "            let div = document.createElement('div')\n" +
-                "            div.innerHTML = data\n" +
-                "            let list = div.getElementsByTagName('li')\n" +
-                "            let last = list.item(list.length-1)\n" +
-                "            let lastName = last.textContent\n" +
-                "            let img = document.getElementById('last')\n" +
-                "            img.src = u + '/'+ lastName\n" +
-                "        });   \n" +
-                "        \n" +
-                "    }\n" +
-                "    setInterval(run,1000)\n" +
-                "</script>";
-        return html;
+    public String gui() {
+        StringBuilder contentBuilder = new StringBuilder();
+        try (Stream<String> stream = Files.lines(Paths.get("index.html"), StandardCharsets.UTF_8)) {
+            stream.forEach(s -> contentBuilder.append(s).append("\n"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return contentBuilder.toString();
     }
 }
