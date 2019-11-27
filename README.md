@@ -7,4 +7,5 @@ web-control-car based on raspberry pi
 
 ## TODO  
 1. fix bug 
-2. cd/ci to create jar file
+2. cd/ci to create jar file (half finished)
+
