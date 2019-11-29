@@ -1,6 +1,7 @@
 package cc.hcen;
 
 
+import cc.hcen.model.C;
 import cc.hcen.model.Car;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -23,11 +24,11 @@ import java.util.stream.Stream;
 public class Main {
 
     public static Car car = new Car();
-    public final static String imgDir = "/home/pi/img";
+
 
     @Bean
     public WebServerFactoryCustomizer<ConfigurableWebServerFactory> webServerFactoryCustomizer() {
-        return factory -> factory.setPort(8090);
+        return factory -> factory.setPort(C.port);
     }
 
     public static void main(String[] args) {

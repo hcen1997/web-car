@@ -8,25 +8,48 @@ import org.springframework.web.bind.annotation.RestController;
 
 import cc.hcen.service.ImgService;
 
+import javax.xml.ws.RequestWrapper;
+
 @RestController
 @RequestMapping("/img")
 public class ImgController {
+
+    private static Long lastCaptureTime;
+
+    ImgController() {
+        lastCaptureTime = System.currentTimeMillis();
+    }
 
     @Autowired
     ImgService imgService;
 
     @RequestMapping("/list")
-    public String list(){
-        return  imgService.list();
+    public String[] list() {
+        return imgService.list();
     }
 
     @RequestMapping("/last")
-    public String last(){
+    public String last() {
         return imgService.last();
     }
 
     @RequestMapping("/{img:.*\\.jpg}")
-    public File getImg(String img){
+    public File getImg(String img) {
         return imgService.get(img);
+    }
+
+    /**
+     * @return capture jpg name
+     */
+    @RequestMapping("/cap")
+    public String capture() {
+        long now = System.currentTimeMillis();
+        if (now - lastCaptureTime > 1000) {
+            lastCaptureTime = now;
+            return imgService.capture();
+        } else {
+            return "Please wait, not enough second.";
+        }
+
     }
 }
