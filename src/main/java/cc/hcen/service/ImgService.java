@@ -46,7 +46,7 @@ public class ImgService {
     }
 
     private String fswebcamCmd(String img) {
-        return String.format("fswebcam %d/%d", C.imgDir, img);
+        return "fswebcam " + C.imgDir + "/" + img;
     }
 
 }
