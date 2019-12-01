@@ -11,21 +11,11 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.stream.Stream;
-
 @SpringBootApplication
 @RestController
 public class Main {
 
     public static Car car = new Car();
-
-
     @Bean
     public WebServerFactoryCustomizer<ConfigurableWebServerFactory> webServerFactoryCustomizer() {
         return factory -> factory.setPort(C.port);
@@ -37,17 +27,17 @@ public class Main {
 
     @RequestMapping("")
     public String index() {
-        return "/car/go;/car/stop;/car/back;\n/gui";
+        return "/car/:[go,stop,back,left,right]\n/gui";
     }
 
     @RequestMapping("/gui")
     public String gui() {
-        StringBuilder contentBuilder = new StringBuilder();
-        try (Stream<String> stream = Files.lines(Paths.get("index.html"), StandardCharsets.UTF_8)) {
-            stream.forEach(s -> contentBuilder.append(s).append("\n"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return contentBuilder.toString();
+        return "<script>\n" +
+                "    (function () {\n" +
+                "    " +
+                "    window.location.href = \"http://hcen.cc:19000/ba90e737c3fe42189f96c9fb624bcb82/index.html\"\n" +
+                "    " +
+                "})()\n" +
+                "</script>";
     }
 }

@@ -1,14 +1,18 @@
 package cc.hcen.controller;
 
-import java.io.File;
-
+import cc.hcen.service.ImgService;
+import com.alibaba.fastjson.JSON;
+import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.HandlerMapping;
 
-import cc.hcen.service.ImgService;
-
-import javax.xml.ws.RequestWrapper;
+import javax.servlet.http.HttpServletRequest;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 
 @RestController
 @RequestMapping("/img")
@@ -23,19 +27,25 @@ public class ImgController {
     @Autowired
     ImgService imgService;
 
+
     @RequestMapping("/list")
-    public String[] list() {
-        return imgService.list();
+    public String list() {
+        return JSON.toJSONString(imgService.list());
     }
 
     @RequestMapping("/last")
     public String last() {
-        return imgService.last();
+        return JSON.toJSONString(imgService.last());
     }
 
-    @RequestMapping("/{img:.*\\.jpg}")
-    public File getImg(String img) {
-        return imgService.get(img);
+    @RequestMapping("/get/**")
+    public @ResponseBody
+    byte[] getImg(HttpServletRequest request) throws IOException {
+        String locationAndFilename = String.valueOf(request.getAttribute(HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE));
+        locationAndFilename = locationAndFilename.substring(
+                locationAndFilename.indexOf("/get/") + "/get/".length());
+        File file = imgService.get(locationAndFilename);
+        return IOUtils.toByteArray(new FileInputStream(file));
     }
 
     /**
