@@ -56,7 +56,7 @@ public class ImgController {
         long now = System.currentTimeMillis();
         if (now - lastCaptureTime > 1000) {
             lastCaptureTime = now;
-            return imgService.capture();
+            return JSON.toJSONString(imgService.capture());
         } else {
             return "Please wait, not enough second.";
         }
