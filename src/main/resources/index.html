@@ -11,6 +11,11 @@
 <script>
     let bb = 'http://hcen.cc:59002'
 
+    function corsFetch(url, callback) {
+
+
+    }
+
     function move(ss) {
         fetch(bb + ss)
     }
@@ -20,13 +25,20 @@
     }
 
     function getImg() {
-        fetch(bb + '/img/last')
-            .then(function (response) {
-                return response.json();
-            }).then(function (json) {
+        let myHeaders = new Headers({
+            'Access-Control-Allow-Origin': '*',
+            'Content-Type': 'text/plain'
+        });
+        fetch(bb + '/img/last', {
+            method: 'GET',
+            headers: myHeaders,
+            mode: 'cors'
+        }).then(function (res) {
+            return res.json()
+        }).then(function (json) {
             let img = document.getElementById('last')
             img.src = bb + '/img/get' + json
-        });
+        })
     }
 
     setInterval(getImg, 1000)

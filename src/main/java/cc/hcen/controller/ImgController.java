@@ -4,6 +4,7 @@ import cc.hcen.service.ImgService;
 import com.alibaba.fastjson.JSON;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -38,6 +39,7 @@ public class ImgController {
         return JSON.toJSONString(imgService.last());
     }
 
+    @CrossOrigin(origins = "http://hcen.cc:19000")
     @RequestMapping("/get/**")
     public @ResponseBody
     byte[] getImg(HttpServletRequest request) throws IOException {
